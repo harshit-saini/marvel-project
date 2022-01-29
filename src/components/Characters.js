@@ -3,7 +3,9 @@ import Card from './Card';
 import useAxios from '../hooks/useAxios';
 import Pagination from '../components/Pagination';
 import Loading from '../components/Loading';
+import Modal from '../components/Modal';
 
+const htmltag = document.getElementsByName("html");
 
 
 
@@ -13,6 +15,10 @@ const Characters = () => {
   const [pageLimit, setPageLimit] = useState(52);   // page limit is currently fixed
   const [pageOffset, setPageOffset] = useState(0);
 
+  const [isModalOpen, setIsModelOpen] = useState(false);
+  const [modalImage, setModalImage] = useState(null);
+
+
   useEffect(() => {
     let newPageOffset = (currentPage - 1) * pageLimit;
     setPageOffset(newPageOffset);
@@ -20,6 +26,12 @@ const Characters = () => {
   }, [currentPage, pageLimit])
 
   const { data, error, isLoading, total } = useAxios("/characters", pageLimit, pageOffset);
+
+  const toggleModal = (image) => {
+    setIsModelOpen(state => !state);
+    setModalImage(image);
+    console.log(isModalOpen, image)
+  }
 
   const renderPagination = () => (
     <Pagination currentPage={currentPage} setCurrentPage={setCurrentPage} pageLimit={pageLimit} total={total} />
@@ -33,7 +45,7 @@ const Characters = () => {
       <div className="row row-cols-1 row-cols-md-2 row-cols-lg-4 ">
         {data.map((item) => (
           <div className="col p-3">
-            <Card key={item.id} name={item.name} image={item.thumbnail.path + "." + item.thumbnail.extension} />
+            <Card key={item.id} name={item.name} image={item.thumbnail.path + "." + item.thumbnail.extension} handleCardClick={toggleModal} />
           </div>
         ))}
 
@@ -61,7 +73,10 @@ const Characters = () => {
       <div className="container" style={{ minHeight: "100vh" }}>
 
         {renderCards()}
+
       </div>
+
+      {isModalOpen && <Modal setIsModelOpen={setIsModelOpen} modalImage={modalImage} />}
     </>
   )
 };
