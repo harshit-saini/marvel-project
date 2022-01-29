@@ -25,9 +25,14 @@
   }
 }
 
+.mycard {
+  transition: 0.3s ease-in-out;
+  cursor: pointer;
+}
+
 .mycard:hover {
   z-index: 2;
-  animation: card-hover-animation 0.3s forwards;
+  transform: scale(1.04);
 }
 
 /* Loading animation */
