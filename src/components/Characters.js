@@ -1,11 +1,11 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import Card from './Card';
 import useAxios from '../hooks/useAxios';
 import Pagination from '../components/Pagination';
 import Loading from '../components/Loading';
 import Modal from '../components/Modal';
 
-const htmltag = document.getElementsByName("html");
+const htmltag = document.getElementsByTagName("html")[0];
 
 
 
@@ -17,6 +17,37 @@ const Characters = () => {
 
   const [isModalOpen, setIsModelOpen] = useState(false);
   const [modalImage, setModalImage] = useState(null);
+
+  const ref = useRef();
+
+  const toExpandBar = () => {
+
+    const options = {
+      root: null, // viewport
+      threshold: 1,
+      rootMargin: "0px"
+    }
+
+    const callbackFunction = (entries, observer) => {
+      entries.forEach(entry => {
+        console.log(entry.boundingClientRect.top)
+        if (entry.boundingClientRect.top <= 0) {
+          entry.target.children[0].classList.add("bar")
+        }
+        if (entry.boundingClientRect.top > 0) {
+          entry.target.children[0].classList.remove("bar")
+        }
+      })
+    }
+
+    const observer = new IntersectionObserver(callbackFunction, options)
+
+    observer.observe(ref.current);
+  }
+
+  useEffect(() => {
+    toExpandBar();
+  }, [])
 
 
   useEffect(() => {
@@ -30,6 +61,9 @@ const Characters = () => {
   const toggleModal = (image) => {
     setIsModelOpen(state => !state);
     setModalImage(image);
+    console.log(htmltag)
+    htmltag.style.overflowX = "hidden";
+    htmltag.style.height = "100vh";
     console.log(isModalOpen, image)
   }
 
@@ -44,7 +78,7 @@ const Characters = () => {
     return (
       <div className="row row-cols-1 row-cols-md-2 row-cols-lg-4 ">
         {data.map((item) => (
-          <div className="col p-3">
+          <div className="col p-3 mb-3">
             <Card key={item.id} name={item.name} image={item.thumbnail.path + "." + item.thumbnail.extension} handleCardClick={toggleModal} />
           </div>
         ))}
@@ -59,8 +93,8 @@ const Characters = () => {
 
   return (
     <>
-      <div className="container sticky-top">
-        <div className="bg-light border-rounded p-2 p-md-4  d-flex flex-column flex-md-row justify-content-between">
+      <div ref={ref} className="container-fluid container-md">
+        <div className="bg-light border-rounded p-2 p-md-3  d-flex flex-column flex-md-row justify-content-between">
           <div>
             <h3>Marvel Characters </h3>
             <span className="small m-0 p-0 text-end">(Showing {pageLimit} of {total} )</span>
