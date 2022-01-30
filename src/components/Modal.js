@@ -20,6 +20,10 @@ const Modal = ({ modalImage, setIsModelOpen }) => {
     }
   })
 
+  const handleCloseBtn = () => {
+    setIsModelOpen(false);
+  }
+
   const style = {
     position: "fixed",
     top: "0",
@@ -34,8 +38,9 @@ const Modal = ({ modalImage, setIsModelOpen }) => {
 
   return (
     <div className="justify-content-center align-items-center" style={style} id="modal">
-      <div className="h-75 w-75">
+      <div className="h-75 w-75" style={{ position: "relative" }}>
         <img className="border border-danger border-rounded bg-danger" height="100%" width="100%" src={modalImage} alt="" style={{ objectFit: "contain" }} />
+        <div className="bg-dark text-white p-1 pointer" style={{ position: "absolute", top: "0", right: "0" }} onClick={handleCloseBtn}>CLOSE</div>
       </div>
     </div>
   )
