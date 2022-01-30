@@ -2,7 +2,7 @@ import React from 'react';
 import Characters from '../components/Characters';
 import HeroSection from '../components/HeroSection';
 import Navbar from '../components/Navbar';
-;
+import Footer from '../components/Footer';
 
 
 
@@ -13,6 +13,7 @@ const Home = () => {
       <Navbar />
       <HeroSection />
       <Characters />
+      <Footer />
     </>
   );
 };
