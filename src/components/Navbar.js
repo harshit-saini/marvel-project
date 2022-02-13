@@ -1,10 +1,33 @@
-import React, { useRef } from 'react';
-import { Link } from 'react-router-dom';
+import React from 'react';
+import { Link, useMatch, useResolvedPath } from 'react-router-dom';
+
+const activeLink = {
+  borderBottom: "2px solid white",
+  color: "white",
+  fontWeight: "bold"
+}
+
+
+const CustomLink = ({ to, children, ...props }) => {
+
+  // const resolvedPath = useResolvedPath(to)  -- i dont know whats its use
+
+  const isMatch = useMatch(to)
+  console.log(isMatch)
+
+  return (
+    <Link to={to} {...props} style={isMatch ? activeLink : {}}>
+      {children}
+    </Link>
+  )
+}
 
 
 const Navbar = () => {
 
-  const navigationRef = useRef();
+
+
+
 
   const handleMenuBtn = () => {
     console.log("menu btn clicked")
@@ -20,13 +43,13 @@ const Navbar = () => {
         <div className="collapse navbar-collapse" id="navContents" >
           <ul className="navbar-nav ms-auto mb-2 mb-lg-0">
             <li className="nav-item">
-              <Link className="nav-link" aria-current="page" to="/">Home</Link>
+              <CustomLink className="nav-link" to="/">Home</CustomLink>
             </li>
             <li className="nav-item">
-              <Link className="nav-link" to="/comics">Comics</Link>
+              <CustomLink className="nav-link" to="/comics">Comics</CustomLink>
             </li>
             <li className="nav-item">
-              <Link className="nav-link" to="/">Disabled</Link>
+              <CustomLink className="nav-link" to="/creators">Creators</CustomLink>
             </li>
           </ul>
         </div>

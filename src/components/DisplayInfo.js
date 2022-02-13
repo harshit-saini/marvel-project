@@ -75,7 +75,7 @@ const DisplayInfo = ({ entity }) => {
     <Pagination currentPage={currentPage} setCurrentPage={setCurrentPage} pageLimit={pageLimit} total={total} />
   );
 
-  const renderCards = () => {
+  const renderCards = (displayValue) => {
 
     if (isLoading === true) return <Loading />
 
@@ -83,7 +83,7 @@ const DisplayInfo = ({ entity }) => {
       <div className="row row-cols-1 row-cols-md-2 row-cols-lg-4 ">
         {data.map((item) => (
           <div className="col p-3 mb-3">
-            <Card key={item.id} name={item.name || item.title} image={item.thumbnail.path + "." + item.thumbnail.extension} handleCardClick={toggleModal} />
+            <Card key={item.id} name={item[displayValue]} image={item.thumbnail.path + "." + item.thumbnail.extension} handleCardClick={toggleModal} />
           </div>
         ))}
 
@@ -92,6 +92,10 @@ const DisplayInfo = ({ entity }) => {
 
   };
 
+  let displayValue = ""
+  if (entity === "characters") displayValue = "name";
+  else if (entity === "comics") displayValue = "title"
+  else if (entity === "creators") displayValue = "fullName"
 
   if (error) return <div>{error}</div>
 
@@ -100,7 +104,7 @@ const DisplayInfo = ({ entity }) => {
       <div ref={ref} className="container-fluid container-md">
         <div className="bg-light border-rounded p-2 p-md-3  d-flex flex-column flex-md-row justify-content-between">
           <div>
-            <h3>Marvel Characters </h3>
+            <h3 className='text-capitalize'>Marvel {entity} </h3>
             <span className="small m-0 p-0 text-end">(Showing {pageLimit} of {total} )</span>
           </div>
           <div className="align-self-center align-self-md-end mt-3 mt-md-0">
@@ -110,7 +114,7 @@ const DisplayInfo = ({ entity }) => {
       </div>
       <div ref={cardsRef} className="container" style={{ minHeight: "100vh" }}>
 
-        {renderCards()}
+        {renderCards(displayValue)}
 
       </div>
 
