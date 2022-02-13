@@ -83,7 +83,7 @@ const DisplayInfo = ({ entity }) => {
       <div className="row row-cols-1 row-cols-md-2 row-cols-lg-4 ">
         {data.map((item) => (
           <div className="col p-3 mb-3">
-            <Card key={item.id} name={item.name} image={item.thumbnail.path + "." + item.thumbnail.extension} handleCardClick={toggleModal} />
+            <Card key={item.id} name={item.name || item.title} image={item.thumbnail.path + "." + item.thumbnail.extension} handleCardClick={toggleModal} />
           </div>
         ))}
 

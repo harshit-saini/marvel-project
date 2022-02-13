@@ -2,8 +2,8 @@
 
 import React from 'react';
 import DisplayInfo from '../components/DisplayInfo';
-import HeroSection from '../components/HeroSection';
 import Layout from '../components/Layout'
+import HeroSection from '../components/HeroSection';
 
 
 
