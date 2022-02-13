@@ -91,3 +91,47 @@
     transform: translate(24px, 0);
   }
 }
+
+.sdds {
+  background-color: #c4313d;
+}
+
+body {
+  background-color: #f1faee;
+}
+
+.bar {
+  width: 100%;
+  border-radius: 0px !important;
+  border-bottom: 2px solid red;
+  position: fixed;
+  top: 0;
+  left: 0;
+  transition: 0.3s ease-in-out;
+  z-index: 1000;
+}
+
+.padding120 {
+  padding-top: 120px;
+}
+
+/* for scrollbar */
+/* width */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #888;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
