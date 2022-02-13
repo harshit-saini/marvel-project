@@ -1,15 +1,15 @@
 import React, { useEffect, useState, useRef } from 'react';
 import Card from './Card';
 import useAxios from '../hooks/useAxios';
-import Pagination from '../components/Pagination';
-import Loading from '../components/Loading';
-import Modal from '../components/Modal';
+import Pagination from './Pagination';
+import Loading from './Loading';
+import Modal from './Modal';
 
 const htmltag = document.getElementsByTagName("html")[0];
 
 
 
-const Characters = () => {
+const DisplayInfo = ({ entity }) => {
 
   const [currentPage, setCurrentPage] = useState(1);
   const [pageLimit, setPageLimit] = useState(52);   // page limit is currently fixed
@@ -19,6 +19,7 @@ const Characters = () => {
   const [modalImage, setModalImage] = useState(null);
 
   const ref = useRef();
+  const cardsRef = useRef();
 
   const toExpandBar = () => {
 
@@ -33,9 +34,12 @@ const Characters = () => {
         console.log(entry.boundingClientRect.top)
         if (entry.boundingClientRect.top <= 0) {
           entry.target.children[0].classList.add("bar")
+          cardsRef.current.classList.add("padding120")
         }
         if (entry.boundingClientRect.top > 0) {
           entry.target.children[0].classList.remove("bar")
+          cardsRef.current.classList.remove("padding120")
+
         }
       })
     }
@@ -56,7 +60,7 @@ const Characters = () => {
     console.log("characters", currentPage)
   }, [currentPage, pageLimit])
 
-  const { data, error, isLoading, total } = useAxios("/characters", pageLimit, pageOffset);
+  const { data, error, isLoading, total } = useAxios(`/${entity}`, pageLimit, pageOffset);
 
   const toggleModal = (image) => {
     setIsModelOpen(state => !state);
@@ -104,7 +108,7 @@ const Characters = () => {
           </div>
         </div>
       </div>
-      <div className="container" style={{ minHeight: "100vh" }}>
+      <div ref={cardsRef} className="container" style={{ minHeight: "100vh" }}>
 
         {renderCards()}
 
@@ -115,4 +119,4 @@ const Characters = () => {
   )
 };
 
-export default Characters;
+export default DisplayInfo;
