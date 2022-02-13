@@ -14,3 +14,4 @@ got to this URL to know about how to authenticate.
 
 1. should start with REACT*APP*
 2. should be all capital letters
+3. example - REACT_APP_HASH="value_here"
