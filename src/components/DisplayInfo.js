@@ -60,7 +60,7 @@ const DisplayInfo = ({ entity }) => {
     console.log("characters", currentPage)
   }, [currentPage, pageLimit])
 
-  const { data, error, isLoading, total } = useAxios(`/${entity}`, pageLimit, pageOffset);
+  const { data, error, isLoading, total = 1000 } = useAxios(`/${entity}`, pageLimit, pageOffset);
 
   const toggleModal = (image) => {
     setIsModelOpen(state => !state);
@@ -108,7 +108,7 @@ const DisplayInfo = ({ entity }) => {
             <span className="small m-0 p-0 text-end">(Showing {pageLimit} of {total} )</span>
           </div>
           <div className="col-12 col-sm-7 d-flex justify-content-end align-items-center" >
-            {renderPagination()}
+            {!isLoading && renderPagination()}
           </div>
         </div>
       </div>

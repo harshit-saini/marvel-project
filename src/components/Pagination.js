@@ -27,7 +27,7 @@ const calculateRange = (pageNumber, totalPages) => {
 
 const Pagination = ({ currentPage, setCurrentPage, pageLimit, total }) => {
 
-  const [numberOfPages, setNumberOfPages] = useState(-1);
+  const [numberOfPages, setNumberOfPages] = useState(10);
   const [range, setRange] = useState([])
 
   console.log(currentPage)
