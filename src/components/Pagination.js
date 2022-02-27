@@ -3,17 +3,23 @@ import React, { useState, useEffect } from 'react';
 // helper functino to create the range of numbers
 const calculateRange = (pageNumber, totalPages) => {
 
-  let currentPage = Number(pageNumber);
+  const currentPage = Number(pageNumber);
+  const rangeArray = [];
 
-  let rangeArray = [];
-  if (currentPage - 2 > 0) {
-    rangeArray.push(currentPage - 2);
-    rangeArray.push(currentPage - 1);
-  }
   rangeArray.push(currentPage);
-  if (currentPage + 2 < totalPages) {
-    rangeArray.push(currentPage + 1);
-    rangeArray.push(currentPage + 2);
+  let p = 1
+  while (rangeArray.length !== 5) {
+    let numberOnLeft = currentPage - p;
+    let numberOnRight = currentPage + p;
+    if (numberOnLeft > 0) {
+      rangeArray.splice(0, 0, ...[numberOnLeft]);
+      if (rangeArray.length === 5) break;
+    }
+    if (numberOnRight <= totalPages) {
+      rangeArray.push(numberOnRight);
+      if (rangeArray.length === 5) break;
+    }
+    ++p;
   }
 
   return rangeArray;
