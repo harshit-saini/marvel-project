@@ -1,13 +1,14 @@
-import React, { useEffect, useState, useRef } from 'react';
-import Card from './Card';
+import React, { useEffect, useState, useRef, useContext } from 'react';
 import useAxios from '../hooks/useAxios';
+
+import Card from './Card';
 import Pagination from './Pagination';
 import Loading from './Loading';
 import Modal from './Modal';
 
+import { ThemeContext } from '../contexts/ThemeContext'
+
 const htmltag = document.getElementsByTagName("html")[0];
-
-
 
 const DisplayInfo = ({ entity }) => {
 
@@ -20,6 +21,9 @@ const DisplayInfo = ({ entity }) => {
 
   const ref = useRef();
   const cardsRef = useRef();
+
+  const themeContext = useContext(ThemeContext);
+  const { isLightTheme, darkTheme, lightTheme } = themeContext;
 
   const toExpandBar = () => {
 
@@ -102,7 +106,10 @@ const DisplayInfo = ({ entity }) => {
   return (
     <>
       <div ref={ref} className="container-fluid container-md">
-        <div className="bg-light border-rounded p-1 px-2 p-md-3 row">
+        <div className="border-rounded p-1 px-2 p-md-3 row" style={{
+          backgroundColor: isLightTheme ? lightTheme.componentBackground : darkTheme.componentBackground,
+          color: isLightTheme ? lightTheme.text : darkTheme.text
+        }}>
           <div class="col-12 col-sm-5">
             <h3 className='text-capitalize'>Marvel {entity} </h3>
             <span className="small m-0 p-0 text-end">(Showing {pageLimit} of {total} )</span>
