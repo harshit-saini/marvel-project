@@ -7,8 +7,8 @@
 }
 
 .border-rounded--bottom {
-  border-bottom-left-radius: 15px;
-  border-bottom-right-radius: 15px;
+  border-bottom-left-radius: 0.6rem;
+  border-bottom-right-radius: 0.6rem;
 }
 
 .pointer {
@@ -26,13 +26,17 @@
 }
 
 .mycard {
-  transition: 0.3s ease-in-out;
+  transition: all 0.3s ease-in-out;
   cursor: pointer;
 }
 
 .mycard:hover {
   z-index: 2;
   transform: scale(1.04);
+}
+
+.mycard:hover .card-title {
+  width: auto !important;
 }
 
 /* Loading animation */
@@ -101,12 +105,13 @@ body {
 }
 
 .bar {
-  width: 100%;
+  /* width: 100%; */
   border-radius: 0px !important;
   border-bottom: 2px solid red;
   position: fixed;
   top: 0;
   left: 0;
+  right: 0;
   transition: 0.3s ease-in-out;
   z-index: 1000;
 }

@@ -77,7 +77,7 @@ const DisplayInfo = ({ entity }) => {
 
   const renderCards = (displayValue) => {
 
-    if (isLoading === true) return <Loading />
+    if (isLoading === true) return <Loading text="Loading" />
 
     return (
       <div className="row row-cols-1 row-cols-md-2 row-cols-lg-4 ">
@@ -102,12 +102,12 @@ const DisplayInfo = ({ entity }) => {
   return (
     <>
       <div ref={ref} className="container-fluid container-md">
-        <div className="bg-light border-rounded p-2 p-md-3  d-flex flex-column flex-md-row justify-content-between">
-          <div>
+        <div className="bg-light border-rounded p-1 px-2 p-md-3 row">
+          <div class="col-12 col-sm-5">
             <h3 className='text-capitalize'>Marvel {entity} </h3>
             <span className="small m-0 p-0 text-end">(Showing {pageLimit} of {total} )</span>
           </div>
-          <div className="align-self-center align-self-md-end mt-3 mt-md-0">
+          <div className="col-12 col-sm-7 d-flex justify-content-end align-items-center" >
             {renderPagination()}
           </div>
         </div>
