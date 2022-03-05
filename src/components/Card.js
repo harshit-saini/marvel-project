@@ -2,7 +2,8 @@ import React from 'react';
 
 const imageStyle = {
   objectFit: "cover",
-  height: "300px"
+  height: "300px",
+  borderRadius: "inherit"
 }
 
 const cardTitleStyle = {
@@ -19,7 +20,7 @@ const Card = ({ image, name, handleCardClick }) => {
 
 
   return (
-    <div className="mycard shadow-lg h-100 border border-rounded" style={{ position: "relative" }} >
+    <div className="mycard shadow-lg h-100 border border-rounded rounded-2 " style={{ position: "relative" }} >
       <img className="card-img-top" src={image} alt={name} style={imageStyle} onClick={() => handleCardClick(image)} />
       <div className="card-title" style={cardTitleStyle}>
         <h5 className=" p-2" >{name}</h5>
