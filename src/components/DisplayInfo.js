@@ -114,7 +114,7 @@ const DisplayInfo = ({ entity }) => {
             <h3 className='text-capitalize'>Marvel {entity} </h3>
             <span className="small m-0 p-0 text-end">(Showing {pageLimit} of {total} )</span>
           </div>
-          <div className="col-12 col-sm-7 d-flex justify-content-end align-items-center" >
+          <div className="col-12 mt-3 col-sm-7 d-flex justify-content-center justify-content-md-end align-items-center" >
             {!isLoading && renderPagination()}
           </div>
         </div>

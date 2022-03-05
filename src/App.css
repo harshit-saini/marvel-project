@@ -140,3 +140,16 @@ body {
 ::-webkit-scrollbar-thumb:hover {
   background: #555;
 }
+
+/*  pagination  */
+
+.pagination .page-link {
+  color: #de4150 !important;
+  border: #de4150 !important;
+}
+
+.pagination .active .page-link {
+  background-color: #de4150 !important;
+  color: white !important;
+  border: #de4150 !important;
+}
